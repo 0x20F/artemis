@@ -1,7 +1,7 @@
 import requests
 
 from bs4 import BeautifulSoup
-from gensim.summarization import summarize
+from gensim.summarization import summarize, keywords
 
 
 # Retrieve page text
@@ -29,3 +29,8 @@ summary = summarize(article, ratio=0.3)
 
 print('Summary length: {} / Article length: {}'.format(len(article), len(summary)))
 print(summary)
+
+print()
+print()
+
+print(keywords(summary))
