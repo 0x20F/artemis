@@ -1,2 +1,3 @@
-env
+artemis
+.vscode
 src/__pycache__
