@@ -7,8 +7,8 @@ from config import Config
 
 c = Config()
 
-for pub in c.publications():
-    print(pub)
+for name, pub in c.publications():
+    print(pub['index'])
 
 """
 # Retrieve page text

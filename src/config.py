@@ -15,6 +15,6 @@ class Config:
         self.config = toml.load(file)
 
 
-    def publications(self) -> Iterator[dict]:
-        return iter(self.config)
+    def publications(self) -> Iterator[tuple]:
+        return self.config.items()
         
