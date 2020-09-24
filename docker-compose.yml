@@ -7,5 +7,5 @@ services:
     #ports:
     #  - "1337:80"
     volumes:
-      - ./:/artemis
+      - ./src:/artemis
     command: echo "Hello World! Art3mis initialized"
