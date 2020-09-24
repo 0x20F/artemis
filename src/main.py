@@ -1,13 +1,16 @@
 import requests
 
-from bs4 import BeautifulSoup
-from gensim.summarization import summarize, keywords
+from config import Config
 
+# from bs4 import BeautifulSoup
+# from gensim.summarization import summarize, keywords
 
+Config().load()
+
+"""
 # Retrieve page text
 url = 'https://medium.com/@alltopstartups/the-single-best-thing-to-do-with-today-live-immediately-41604a14b6ac'
 text = requests.get(url).text
-
 
 # Soup
 soup = BeautifulSoup(text, features='html.parser')
@@ -33,4 +36,4 @@ print(summary)
 print()
 print()
 
-print(keywords(summary))
+print(keywords(summary))"""
