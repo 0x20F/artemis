@@ -5,7 +5,10 @@ from config import Config
 # from bs4 import BeautifulSoup
 # from gensim.summarization import summarize, keywords
 
-Config().load()
+c = Config()
+
+for pub in c.publications():
+    print(pub)
 
 """
 # Retrieve page text
