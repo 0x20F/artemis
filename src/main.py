@@ -19,7 +19,7 @@ p_tags_text = [tag.get_text().strip() for tag in soup.select('article section p'
 
 
 # Filter out useless text
-sentence_list = [sentence for sentence in p_tags_text if not '\n' in sentence]
+sentence_list = [sentence for sentence in p_tags_text if '\n' not in sentence]
 sentence_list = [sentence for sentence in sentence_list if '.' in sentence]
 # Combine them all into a string
 article = ' '.join(sentence_list)
