@@ -1,14 +1,14 @@
 import requests
 
-from config import Config
+from config.sources import Sources
 
 # from bs4 import BeautifulSoup
 # from gensim.summarization import summarize, keywords
 
-c = Config()
+s = Sources()
 
-for name, pub in c.publications():
-    print(pub['index'])
+for pub in s.publications():
+    print(pub.selector('headline'))
 
 """
 # Retrieve page text

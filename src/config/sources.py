@@ -6,8 +6,10 @@ import toml
 from pathlib import Path
 from typing import Iterator
 
+from .publication import Publication
 
-class Config:
+
+class Sources:
 
     # Load the configuration file
     def __init__(self):
@@ -15,6 +17,11 @@ class Config:
         self.config = toml.load(file)
 
 
-    def publications(self) -> Iterator[tuple]:
-        return self.config.items()
+    def publications(self) -> Iterator[Publication]:
+        publications = list()
+        
+        for name, info in self.config.items():
+            publications.append(Publication(name, info))
+
+        return publications
         
