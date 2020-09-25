@@ -2,7 +2,7 @@ import requests
 
 from config.sources import Sources
 
-# from bs4 import BeautifulSoup
+from bs4 import BeautifulSoup
 # from gensim.summarization import summarize, keywords
 
 s = Sources()
@@ -27,6 +27,12 @@ sentence_list = [sentence for sentence in p_tags_text if '\n' not in sentence]
 sentence_list = [sentence for sentence in sentence_list if '.' in sentence]
 # Combine them all into a string
 article = ' '.join(sentence_list)
+
+from model import Summarization
+
+summarization = Summarization(device='cpu')
+output = summarization.set_text(article).summarize(verbose=False)
+print('\n\n' + output)
 
 
 summary = summarize(article, ratio=0.3)
