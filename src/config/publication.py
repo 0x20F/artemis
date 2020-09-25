@@ -9,7 +9,7 @@
 import requests
 
 from bs4 import BeautifulSoup
-from typing import List
+from typing import List, Iterator
 
 from .article import Article
 
@@ -25,7 +25,7 @@ class Publication:
         self.home = info['index']
 
         # List of article urls parsed from home page
-        self.articles = self.collect_articles()
+        self.article_list = self.collect_articles()
 
 
     def selector(self, name: str):
@@ -35,14 +35,18 @@ class Publication:
         print('Selector id not found')
         
 
-    def collect_articles(self) -> List[Article]:
+    def collect_articles(self) -> List[tuple]:
         text = requests.get(self.home).text
         soup = BeautifulSoup(text, features='html.parser')
 
         a_tags = soup.select(self.selector('url'))
         a_data = [ (tag.get_text(), self.home + tag['href']) for tag in a_tags ]
 
-        text_selector = self.selector('text')
-        articles = [ Article(info, text_selector) for info in a_data ]
+        return a_data
 
-        return articles
+    
+    def articles(self):
+        text_key = self.selector('text')
+
+        for headline, url in self.article_list:
+            yield Article(headline, url, text_key)
