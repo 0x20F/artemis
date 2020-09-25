@@ -26,7 +26,7 @@ class Publication:
         self.articles = self.collect_articles()
 
 
-    def selector(self, name: str) -> None:
+    def selector(self, name: str):
         if name in self.selectors:
             return self.selectors[name]
         
