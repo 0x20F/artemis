@@ -2,11 +2,12 @@ import requests
 
 from config import Config
 
-# from bs4 import BeautifulSoup
+from bs4 import BeautifulSoup
 # from gensim.summarization import summarize, keywords
 
 c = Config()
 
+"""
 for name, pub in c.publications():
     print(pub['index'])
 
@@ -30,7 +31,14 @@ sentence_list = [sentence for sentence in sentence_list if '.' in sentence]
 # Combine them all into a string
 article = ' '.join(sentence_list)
 
+from model import Summarization
 
+summarization = Summarization(device='cpu')
+output = summarization.set_text(article).summarize(verbose=False)
+print('\n\n' + output)
+
+
+"""
 summary = summarize(article, ratio=0.3)
 
 print('Summary length: {} / Article length: {}'.format(len(article), len(summary)))
