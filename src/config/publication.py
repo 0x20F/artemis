@@ -11,6 +11,8 @@ import requests
 from bs4 import BeautifulSoup
 from typing import List
 
+from .article import Article
+
 
 class Publication:
 
@@ -33,11 +35,14 @@ class Publication:
         print('Selector id not found')
         
 
-    def collect_articles(self) -> List[str]:
+    def collect_articles(self) -> List[Article]:
         text = requests.get(self.home).text
         soup = BeautifulSoup(text, features='html.parser')
 
-        a_links = [ tag['href'] for tag in soup.select(self.selector('url')) ]
-        full_links = [ self.home + link for link in a_links ]
+        a_tags = soup.select(self.selector('url'))
+        a_data = [ (tag.get_text(), self.home + tag['href']) for tag in a_tags ]
 
-        return full_links
+        text_selector = self.selector('text')
+        articles = [ Article(info, text_selector) for info in a_data ]
+
+        return articles
