@@ -6,9 +6,7 @@ from config.sources import Sources
 # from gensim.summarization import summarize, keywords
 
 s = Sources()
-
-for pub in s.publications():
-    print(pub.selector('headline'))
+p = s.publications()[0]
 
 """
 # Retrieve page text
