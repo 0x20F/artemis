@@ -16,7 +16,7 @@ class Article:
 
     
     def read(self) -> str:
-        if not self.text:
+        if self.text:
             return self.text
 
         page = requests.get(self.url).text
@@ -28,3 +28,4 @@ class Article:
 
         self.text = ' '.join(sentences)
         return self.text
+        

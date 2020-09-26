@@ -1,9 +1,7 @@
 import requests
 
 from config.sources import Sources
-
-# from bs4 import BeautifulSoup
-# from gensim.summarization import summarize, keywords
+from gensim.summarization import summarize, keywords
 
 # Load in the config
 sources = Sources()
@@ -13,13 +11,10 @@ publications = sources.publications()
 # Get all articles from one publication
 articles = publications[0].articles()
 # Request all text from an article
-text = next(articles).read()
-
-print(len(text))
+article = next(articles).read()
 
 
-"""
-summary = summarize(article, ratio=0.3)
+summary = summarize(article, ratio=0.2)
 
 print('Summary length: {} / Article length: {}'.format(len(article), len(summary)))
 print(summary)
@@ -27,4 +22,4 @@ print(summary)
 print()
 print()
 
-print(keywords(summary))"""
+print(keywords(summary))
