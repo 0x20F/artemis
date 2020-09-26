@@ -14,7 +14,8 @@ services:
     #  - "1337:80"
     volumes:
       - ./:/artemis
-    command: tail -f /dev/null
+      - ./installed:/usr/local/lib/python3.8/site-packages # For development only
+    command: tail -f /dev/null # Run the server here when it's built
 
 
   # -----------------------------------
