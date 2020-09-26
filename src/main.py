@@ -1,7 +1,4 @@
-import requests
-
 from config.sources import Sources
-from gensim.summarization import summarize, keywords
 
 # Load in the config
 sources = Sources()

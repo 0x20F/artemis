@@ -9,7 +9,6 @@
 import requests
 
 from bs4 import BeautifulSoup
-from typing import List, Iterator
 
 from .article import Article
 
@@ -27,13 +26,11 @@ class Publication:
         # List of article urls parsed from home page
         self.article_list = self.collect_articles()
 
-
     def selector(self, name: str):
         if name in self.selectors:
             return self.selectors[name]
         
         print('Selector id not found')
-        
 
     def collect_articles(self) -> List[tuple]:
         text = requests.get(self.home).text
@@ -44,7 +41,6 @@ class Publication:
 
         return a_data
 
-    
     def articles(self):
         text_key = self.selector('text')
 

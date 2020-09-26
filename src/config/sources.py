@@ -16,7 +16,6 @@ class Sources:
         file = Path.joinpath(Path.home(), 'artemis.toml')
         self.config = toml.load(file)
 
-
     def publications(self) -> Iterator[Publication]:
         publications = list()
         
@@ -24,4 +23,3 @@ class Sources:
             publications.append(Publication(name, info))
 
         return publications
-        

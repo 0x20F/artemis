@@ -18,7 +18,6 @@ class Article:
         self.summary = ''
         self.keyword_list = []
 
-    
     def read(self) -> str:
         if self.text:
             return self.text
@@ -26,13 +25,12 @@ class Article:
         page = requests.get(self.url).text
         soup = BeautifulSoup(page, features='html.parser')
 
-        text_tags = [ tag.get_text().strip() for tag in soup.select(self.selector) ]
-        sentences = [ sentence for sentence in text_tags if not '\n' in sentence ]
-        sentences = [ sentence for sentence in sentences if '.' in sentence ]
+        text_tags = [tag.get_text().strip() for tag in soup.select(self.selector)]
+        sentences = [sentence for sentence in text_tags if '\n' not in sentence]
+        sentences = [sentence for sentence in sentences if '.' in sentence]
 
         self.text = ' '.join(sentences)
         return self.text
-
 
     def summarize(self) -> str:
         if self.summary:
@@ -45,7 +43,6 @@ class Article:
         self.summary = summarize(self.text, ratio=0.2)
         return self.summary
 
-    
     def keywords(self) -> List[str]:
         if len(self.keyword_list) > 0:
             return self.keyword_list
@@ -55,4 +52,3 @@ class Article:
 
         self.keyword_list = keywords(self.text).split('\n')
         return self.keyword_list
-        
