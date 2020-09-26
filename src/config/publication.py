@@ -22,7 +22,7 @@ class Publication:
             'text': info['text'],
             'url': info['url']
         }
-        self.home = info['index']
+        self.home = info['home']
 
         # List of article urls parsed from home page
         self.article_list = self.collect_articles()
