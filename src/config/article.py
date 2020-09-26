@@ -12,7 +12,7 @@ class Article:
         self.url = url
         self.selector = key
 
-        self.text = 'aaa'
+        self.text = ''
 
     
     def read(self) -> str:
