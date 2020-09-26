@@ -30,7 +30,7 @@ class Publication:
     def selector(self, name: str):
         if name in self.selectors:
             return self.selectors[name]
-        
+
         print('Selector id not found')
 
     def collect_articles(self) -> List[tuple]:
@@ -38,7 +38,7 @@ class Publication:
         soup = BeautifulSoup(text, features='html.parser')
 
         a_tags = soup.select(self.selector('url'))
-        a_data = [ (tag.get_text(), self.home + tag['href']) for tag in a_tags ]
+        a_data = [(tag.get_text(), self.home + tag['href']) for tag in a_tags]
 
         return a_data
 

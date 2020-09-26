@@ -18,7 +18,7 @@ class Sources:
 
     def publications(self) -> Iterator[Publication]:
         publications = list()
-        
+
         for name, info in self.config.items():
             publications.append(Publication(name, info))
 

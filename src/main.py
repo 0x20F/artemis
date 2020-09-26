@@ -39,6 +39,6 @@ Next up
 
 - Prefered keywords list needs to be implemented
 
-- Filter articles based on containing keywords in order to decide how 
+- Filter articles based on containing keywords in order to decide how
   relevant they actually are to your needs
 '''
