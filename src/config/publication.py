@@ -9,6 +9,7 @@
 import requests
 
 from bs4 import BeautifulSoup
+from typing import List
 
 from .article import Article
 
