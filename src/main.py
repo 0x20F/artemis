@@ -1,40 +1,22 @@
 import requests
 
 from config.sources import Sources
+from gensim.summarization import summarize, keywords
 
-# from bs4 import BeautifulSoup
-# from gensim.summarization import summarize, keywords
+# Load in the config
+sources = Sources()
+# Get all article lists for all fields in the config
+publications = sources.publications()
 
-s = Sources()
-p = s.publications()[0]
+# Get all articles from one publication
+articles = publications[0].articles()
+# Request all text from an article
+article = next(articles)
 
-"""
-# Retrieve page text
-url = 'https://medium.com/@alltopstartups/the-single-best-thing-to-do-with-today-live-immediately-41604a14b6ac'
-text = requests.get(url).text
+# Summarize article
+summary = article.summarize()
+# Get keywords from article
+keywords = article.keywords()
 
-# Soup
-soup = BeautifulSoup(text, features='html.parser')
-
-# Headline
-headline = soup.select('article section h1')[0].text
-# Text from all paragraphs
-p_tags_text = [tag.get_text().strip() for tag in soup.select('article section p')]
-
-
-# Filter out useless text
-sentence_list = [sentence for sentence in p_tags_text if '\n' not in sentence]
-sentence_list = [sentence for sentence in sentence_list if '.' in sentence]
-# Combine them all into a string
-article = ' '.join(sentence_list)
-
-
-summary = summarize(article, ratio=0.3)
-
-print('Summary length: {} / Article length: {}'.format(len(article), len(summary)))
-print(summary)
-
-print()
-print()
-
-print(keywords(summary))"""
+print('Article length: {} / Summary length: {}'.format(len(article.text), len(summary)))
+print('Found keywords: {}'.format(len(keywords)))
