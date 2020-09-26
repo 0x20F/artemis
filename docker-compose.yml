@@ -8,11 +8,13 @@ services:
   artemis:
     container_name: artemis
     image: python:3
+    links:
+      - storage
     #ports:
     #  - "1337:80"
     volumes:
       - ./:/artemis
-    command: echo "Hello World! Art3mis initialized"
+    command: tail -f /dev/null
 
 
   # -----------------------------------
