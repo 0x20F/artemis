@@ -5,11 +5,18 @@ from config.sources import Sources
 # from bs4 import BeautifulSoup
 # from gensim.summarization import summarize, keywords
 
-s = Sources()
-p = s.publications()[0]
+# Load in the config
+sources = Sources()
+# Get all article lists for all fields in the config
+publications = sources.publications()
 
-for a in p.articles():
-    print(a.headline)
+# Get all articles from one publication
+articles = publications[0].articles()
+# Request all text from an article
+text = next(articles).read()
+
+print(len(text))
+
 
 """
 summary = summarize(article, ratio=0.3)
