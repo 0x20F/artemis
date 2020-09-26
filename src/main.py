@@ -11,15 +11,12 @@ publications = sources.publications()
 # Get all articles from one publication
 articles = publications[0].articles()
 # Request all text from an article
-article = next(articles).read()
+article = next(articles)
 
+# Summarize article
+summary = article.summarize()
+# Get keywords from article
+keywords = article.keywords()
 
-summary = summarize(article, ratio=0.2)
-
-print('Summary length: {} / Article length: {}'.format(len(article), len(summary)))
-print(summary)
-
-print()
-print()
-
-print(keywords(summary))
+print('Article length: {} / Summary length: {}'.format(len(article.text), len(summary)))
+print('Found keywords: {}'.format(len(keywords)))
