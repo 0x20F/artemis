@@ -3,6 +3,7 @@ artemis
 .vscode
 src/__pycache__
 src/config/__pycache__
+src/schemas/__pycache__
 env/
 venv/
 installed/

@@ -1,4 +1,8 @@
+from database import Database
 from config.sources import Sources
+
+from schemas.article import Article
+
 
 # Load in the config
 sources = Sources()
@@ -18,6 +22,20 @@ keywords = article.keywords()
 print('Article length: {} / Summary length: {}'.format(len(article.text), len(summary)))
 print('Found keywords: {}'.format(len(keywords)))
 
+# Connect to the database
+d = Database()
+
+# Save a new article based on the parsed values
+a = Article(
+  parent_publication=article.url,
+  title=article.headline,
+  url=article.url,
+  summary=article.summary,
+  keywords=article.keywords()
+).save()
+
+print(Article.objects().count())
+print(Article.objects(url=article.url).count())
 '''
 Next up
 --------
