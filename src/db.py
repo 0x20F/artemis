@@ -1,11 +1,28 @@
-from pymongo import MongoClient
-from pprint import pprint
+import datetime
+import mongoengine as mdb
 
-client = MongoClient('mongodb://root:toor@localhost:27017')
+mdb.connect('fresh', username='root', password='toor', authentication_source='admin')
 
-# Creates a new database called 'lmao' if it doesn't exist
-db = client.lmao
 
-# Creates a new collection called 'not_lmao' in
-# that database and inserts the object into it
-db.not_lmao.insert_one({ "aye": "lmao" })
+class Article(mdb.Document):
+    parent_publication = mdb.StringField(required=True)
+
+    url = mdb.StringField(required=True)
+    title = mdb.StringField(required=True)
+    
+    summary = mdb.StringField()
+    summarized = mdb.DateTimeField(default=datetime.datetime.now)
+
+    keywords = mdb.ListField(mdb.StringField())
+
+
+a = Article(
+    parent_publication='https://medium.com',
+    url='whatever article url',
+    title='Whatever clickbaity article title'
+)
+
+a.save()
+
+print(Article.objects()[0].title)
+print(Article.objects().count())

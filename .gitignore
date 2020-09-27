@@ -1,6 +1,8 @@
+./idea
 artemis
 .vscode
 src/__pycache__
 src/config/__pycache__
 env/
+venv/
 installed/
