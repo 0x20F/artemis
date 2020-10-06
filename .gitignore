@@ -1,4 +1,4 @@
-./idea
+.idea
 artemis
 .vscode
 src/__pycache__
@@ -7,3 +7,8 @@ src/schemas/__pycache__
 env/
 venv/
 installed/
+pyvenv.cfg
+include/*
+lib/*
+bin/*
+src/database.pyc

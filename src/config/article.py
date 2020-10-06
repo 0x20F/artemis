@@ -6,6 +6,11 @@ from bs4 import BeautifulSoup
 from gensim.summarization import summarize, keywords
 from typing import List
 
+import sys
+sys.path.append('..')
+
+from schemas.article import Article as ArticleModel
+
 
 class Article:
 
@@ -52,3 +57,12 @@ class Article:
 
         self.keyword_list = keywords(self.text).split('\n')
         return self.keyword_list
+
+    def to_model(self) -> ArticleModel:
+        return ArticleModel(
+            parent_publication=self.url,
+            title=self.headline,
+            url=self.url,
+            summary=self.summarize(),
+            keywords=self.keywords()
+        )

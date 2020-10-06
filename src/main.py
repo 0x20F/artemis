@@ -14,25 +14,16 @@ articles = publications[0].articles()
 # Request all text from an article
 article = next(articles)
 
-# Summarize article
-summary = article.summarize()
-# Get keywords from article
-keywords = article.keywords()
-
-print('Article length: {} / Summary length: {}'.format(len(article.text), len(summary)))
-print('Found keywords: {}'.format(len(keywords)))
-
 # Connect to the database
 d = Database()
 
-# Save a new article based on the parsed values
-a = Article(
-  parent_publication=article.url,
-  title=article.headline,
-  url=article.url,
-  summary=article.summary,
-  keywords=article.keywords()
-).save()
+# Turn the article into a model that contains all the needed data
+# And save it to the database
+a = article.to_model().save()
+
+
+print('Article length: {} / Summary length: {}'.format(len(article.text), len(article.summary)))
+print('Found keywords: {}'.format(len(article.keywords)))
 
 print(Article.objects().count())
 print(Article.objects(url=article.url).count())
