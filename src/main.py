@@ -21,9 +21,10 @@ d = Database()
 # And save it to the database
 a = article.to_model().save()
 
-
+print(article.headline)
+print(article.url)
 print('Article length: {} / Summary length: {}'.format(len(article.text), len(article.summary)))
-print('Found keywords: {}'.format(len(article.keywords)))
+print('Found keywords: {}'.format(len(article.keyword_list)))
 
 print(Article.objects().count())
 print(Article.objects(url=article.url).count())
