@@ -7,7 +7,7 @@ services:
   # -----------------------------------
   artemis:
     container_name: artemis
-    image: python:3
+    image: python:3.6.9
     links:
       - storage
     #ports:

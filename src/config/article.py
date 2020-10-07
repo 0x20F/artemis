@@ -6,8 +6,8 @@ from bs4 import BeautifulSoup
 from gensim.summarization import summarize, keywords
 from typing import List
 
-import sys
-sys.path.append('..')
+#import sys
+#sys.path.append('..')
 
 from schemas.article import Article as ArticleModel
 
