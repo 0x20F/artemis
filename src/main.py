@@ -1,7 +1,4 @@
-from database import Database
 from config.sources import Sources
-
-from schemas.article import Article
 
 
 # Load in the config
@@ -14,20 +11,15 @@ articles = publications[0].articles()
 # Request all text from an article
 article = next(articles)
 
-# Connect to the database
-d = Database()
 
-# Turn the article into a model that contains all the needed data
-# And save it to the database
-a = article.to_model().save()
+article.summarize()
+article.keywords()
 
 print(article.headline)
 print(article.url)
 print('Article length: {} / Summary length: {}'.format(len(article.text), len(article.summary)))
 print('Found keywords: {}'.format(len(article.keyword_list)))
 
-print(Article.objects().count())
-print(Article.objects(url=article.url).count())
 '''
 Next up
 --------
