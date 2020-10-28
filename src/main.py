@@ -1,6 +1,20 @@
 from config.sources import Sources
 
 
+
+# Play with connections
+from sqlalchemy import create_engine
+from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.orm import sessionmaker
+
+engine = create_engine('mysql+pymysql://root:root@127.0.0.1/artemis')
+session = sessionmaker(bind=engine)
+
+base = declarative_base()
+
+
+
+'''
 # Load in the config
 sources = Sources()
 # Get all article lists for all fields in the config
@@ -18,7 +32,7 @@ article.keywords()
 print(article.headline)
 print(article.url)
 print('Article length: {} / Summary length: {}'.format(len(article.text), len(article.summary)))
-print('Found keywords: {}'.format(len(article.keyword_list)))
+print('Found keywords: {}'.format(len(article.keyword_list)))'''
 
 '''
 Next up
