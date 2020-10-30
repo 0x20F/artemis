@@ -1,7 +1,21 @@
 from config.sources import Sources
 
 
+sources = Sources()
+publications = sources.publications()
 
+articles = publications[0].articles()
+
+article = next(articles)
+
+
+article.summarize()
+article.get_keywords()
+
+print(article.headline)
+print(article.url)
+print('Article length: {} / Summary length: {}'.format(len(article.text), len(article.summary)))
+print('Found keywords: {}'.format(len(article.keyword_list)))
 
 
 
