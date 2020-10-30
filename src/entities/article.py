@@ -12,13 +12,13 @@ class Article(Base):
     __tablename__ = 'articles'
 
     id = Column(Integer, primary_key=True)
-    headline = Column(String)
-    article_url = Column(String)
-    publication_url = Column(String)
-    keywords = Column(String) # This is a list so maybe make it nicer
+    headline = Column('headline', String)
+    article_url = Column('article_url', String)
+    publication_url = Column('publication_url', String)
+    keywords = Column('keywords', String) # This is a list so maybe make it nicer
 
-    summary = Column(Text)
-    summarised_date = Column(DateTime, default=datetime.datetime.utcnow)
+    summary = Column('summary', Text)
+    summarised_date = Column('summarised_date', DateTime, default=datetime.datetime.utcnow)
 
     def __init__(self, headline: str, url: str, key: str):
         self.headline = headline
@@ -63,4 +63,3 @@ class Article(Base):
 
         self.keyword_list = keywords(self.text).split('\n')
         return self.keyword_list
-

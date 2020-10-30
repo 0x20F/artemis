@@ -1,4 +1,17 @@
 from config.sources import Sources
+from base import Session, engine, Base
+
+
+
+
+# Db Schema
+Base.metadata.create_all(engine)
+
+# New Session
+session = Session()
+
+
+
 
 
 sources = Sources()
@@ -16,6 +29,10 @@ print(article.headline)
 print(article.url)
 print('Article length: {} / Summary length: {}'.format(len(article.text), len(article.summary)))
 print('Found keywords: {}'.format(len(article.keyword_list)))
+
+session.add(article)
+session.commit()
+session.close()
 
 
 
