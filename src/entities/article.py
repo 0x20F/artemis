@@ -12,17 +12,17 @@ class Article(Base):
     __tablename__ = 'articles'
 
     id = Column(Integer, primary_key=True)
-    headline = Column('headline', String)
-    article_url = Column('article_url', String)
-    publication_url = Column('publication_url', String)
-    keywords = Column('keywords', String) # This is a list so maybe make it nicer
+    headline = Column('headline', String(255))
+    article_url = Column('article_url', String(255))
+    publication_url = Column('publication_url', String(255))
+    keywords = Column('keywords', String(255)) # This is a list so maybe make it nicer
 
     summary = Column('summary', Text)
     summarised_date = Column('summarised_date', DateTime, default=datetime.datetime.utcnow)
 
     def __init__(self, headline: str, url: str, key: str):
         self.headline = headline
-        self.url = url
+        self.article_url = url
         self.selector = key
 
         self.text = ''
@@ -33,7 +33,7 @@ class Article(Base):
         if self.text:
             return self.text
 
-        page = requests.get(self.url).text
+        page = requests.get(self.article_url).text
         soup = BeautifulSoup(page, features='html.parser')
 
         text_tags = [tag.get_text().strip() for tag in soup.select(self.selector)]
