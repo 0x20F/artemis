@@ -4,7 +4,9 @@ import requests
 from bs4 import BeautifulSoup
 from gensim.summarization import summarize, keywords
 from sqlalchemy import Column, String, Integer, Text, DateTime
+from sqlalchemy.orm import relationship
 from base import Base
+from entities.keyword import Keyword
 from typing import List
 
 
@@ -15,7 +17,7 @@ class Article(Base):
     headline = Column('headline', String(255))
     article_url = Column('article_url', String(255))
     publication_url = Column('publication_url', String(255))
-    keywords = Column('keywords', String(255)) # This is a list so maybe make it nicer
+    keywords = relationship("Keyword", backref='articles')
 
     summary = Column('summary', Text)
     summarised_date = Column('summarised_date', DateTime, default=datetime.datetime.utcnow)
@@ -67,4 +69,6 @@ class Article(Base):
             self.read()
 
         self.keyword_list = keywords(self.text, words=10, lemmatize=True).split('\n')
-        return self.keyword_list
+        self.keywords = [Keyword(word) for word in self.keyword_list]
+
+        return self.keywords

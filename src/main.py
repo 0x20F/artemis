@@ -16,7 +16,10 @@ articles = publications[0].articles()
 
 for article in articles:
     print(article)
+    session.add(article)
+    break
 
+session.commit()
 session.close()
 
 
