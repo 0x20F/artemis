@@ -9,7 +9,7 @@ from typing import Iterator
 from .publication import Publication
 
 
-class Sources:
+class Artemis:
 
     # Load the configuration file
     def __init__(self):

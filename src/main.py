@@ -1,5 +1,6 @@
-from config.sources import Sources
+from config.artemis import Artemis
 from base import Session, engine, Base
+from entities.article import Article
 
 
 # Db Schema
@@ -7,43 +8,31 @@ Base.metadata.create_all(engine)
 
 # New Session
 session = Session()
-sources = Sources()
+artemis = Artemis()
 
-publications = sources.publications()
+publications = artemis.publications()
 print(f"Found {len(publications)} publications")
 
 articles = publications[0].articles()
 
 for article in articles:
+    article.summarize()
+    article.get_keywords()
+
     print(article)
     session.add(article)
     break
 
 session.commit()
+
+# Just trying things out
+res = session.query(Article)
+print(res.count())
+print(res[0])
+
 session.close()
 
 
-
-
-'''
-# Load in the config
-sources = Sources()
-# Get all article lists for all fields in the config
-publications = sources.publications()
-
-# Get all articles from one publication
-articles = publications[0].articles()
-# Request all text from an article
-article = next(articles)
-
-
-article.summarize()
-article.keywords()
-
-print(article.headline)
-print(article.url)
-print('Article length: {} / Summary length: {}'.format(len(article.text), len(article.summary)))
-print('Found keywords: {}'.format(len(article.keyword_list)))'''
 
 '''
 Next up

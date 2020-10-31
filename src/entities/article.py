@@ -22,19 +22,20 @@ class Article(Base):
     summary = Column('summary', Text)
     summarised_date = Column('summarised_date', DateTime, default=datetime.datetime.utcnow)
 
+    keyword_list = []
+    text = ''
+
     def __init__(self, headline: str, url: str, key: str):
         self.headline = headline
         self.article_url = url
         self.selector = key
 
-        self.text = ''
         self.summary = ''
-        self.keyword_list = []
 
     def __str__(self):
         return f"Article: {self.headline}\n" \
-               f"Keywords: {self.get_keywords()}\n" \
-               f"Summary Length: {len(self.summarize())}\n\n"
+               f"Keywords: {[word.keyword for word in self.keywords]}\n" \
+               f"Summary Length: {len(self.summary)}\n\n"
 
     def read(self) -> str:
         if self.text:
