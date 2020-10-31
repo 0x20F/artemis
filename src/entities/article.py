@@ -29,6 +29,11 @@ class Article(Base):
         self.summary = ''
         self.keyword_list = []
 
+    def __str__(self):
+        return f"Article: {self.headline}\n" \
+               f"Keywords: {self.get_keywords()}\n" \
+               f"Summary Length: {len(self.summarize())}\n\n"
+
     def read(self) -> str:
         if self.text:
             return self.text
@@ -61,5 +66,5 @@ class Article(Base):
         if not self.text:
             self.read()
 
-        self.keyword_list = keywords(self.text).split('\n')
+        self.keyword_list = keywords(self.text, words=10, lemmatize=True).split('\n')
         return self.keyword_list

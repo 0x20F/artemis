@@ -2,36 +2,21 @@ from config.sources import Sources
 from base import Session, engine, Base
 
 
-
-
 # Db Schema
 Base.metadata.create_all(engine)
 
 # New Session
 session = Session()
-
-
-
-
-
 sources = Sources()
+
 publications = sources.publications()
+print(f"Found {len(publications)} publications")
 
 articles = publications[0].articles()
 
-article = next(articles)
+for article in articles:
+    print(article)
 
-
-article.summarize()
-article.get_keywords()
-
-print(article.headline)
-print(article.article_url)
-print('Article length: {} / Summary length: {}'.format(len(article.text), len(article.summary)))
-print('Found keywords: {}'.format(len(article.keyword_list)))
-
-session.add(article)
-session.commit()
 session.close()
 
 
